@@ -58,6 +58,7 @@ resource "aws_instance" "web" {
   subnet_id     = aws_subnet.public.id
 
   associate_public_ip_address = true
+  key_name = "terraform-key"
 
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
@@ -91,7 +92,3 @@ resource "aws_security_group" "web_sg" {
   }
 }
 
-resource "aws_key_pair" "deployer" {
-  key_name   = "terraform-key"
-  public_key = file("~/.ssh/id_rsa.pub")
-}
