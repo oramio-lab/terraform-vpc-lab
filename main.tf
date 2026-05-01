@@ -52,3 +52,14 @@ resource "aws_route_table_association" "rta" {
   subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.rt.id
 }
+resource "aws_instance" "web" {
+  ami           = "ami-0c94855ba95c71c99"  # (us-east-1 기준 Amazon Linux2)
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.public.id
+
+  associate_public_ip_address = true
+
+  tags = {
+    Name = "terraform-ec2"
+  }
+}
